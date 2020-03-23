@@ -76,9 +76,13 @@ function temperatureCtoF(temp) {
  * 
  * Hint: You can call your `temperatureCtoF` function from inside `temperatureInF`.
 */
-function temperatureInF() {
+function temperatureInF(temp, unit) {
 /* code here */
-  
+  if (unit === 'F') {
+    return temp + unit;
+  } else {
+    return temperatureCtoF(temp) + 'F';
+  }
   
   
 }
@@ -119,9 +123,9 @@ function makePersonObject(id, name, email) {
  * passing { id: 1, name: 'Leia', email: 'leia@leia.com` } as the argument,
  * the returned value should look like `Hello, my name is Leia`.
 */
-function getName(name) {
+function getName(obj) {
 /* code here */
-  return `Hello, my name is ${name}`
+  return `Hello, my name is ${obj.name}`
 }
 
 
@@ -236,7 +240,7 @@ function get3rdCar(inventory) {
 function getCarInfoByIndex(inventory, index) {
   const line = inventory[index]
 /* code here */
-  return `This is a ${line.car_make} ${line.car_modal}`
+  return `This is a ${line.car_make} ${line.car_model}`
 }
 
 /**
@@ -253,7 +257,7 @@ function getCarInfoByIndex(inventory, index) {
 function getLastCarInfo(inventory) {
 /* code here */
   const last = inventory[inventory.length - 1]
-  return `This is a ${last.car_make} ${last.car_modal}`;
+  return `This is a ${last.car_make} ${last.car_model}`;
 }
 
 /**
@@ -267,11 +271,12 @@ function getLastCarInfo(inventory) {
 */
 function getModelYears(inventory) {
 /* code here */
-  let year = []
-  for (let i = 0; i < inventory.length - 1; i++) {
-    year.push(inventory.car_year)
+  let arr = [];
+
+  for (let i = 0; i < inventory.length; i++) {
+    arr.push(inventory[i].car_year)
   }
-  return year
+  return arr
 }
 
 /**
@@ -288,8 +293,10 @@ function getModelYears(inventory) {
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
 */
-function getCarInfoById(/* code here */) {
-  /* code here */
+function getCarInfoById(inventory, id) {
+/* code here */
+  let identify = inventory[id]
+  return `This is a ${identify.car_make} ${identify.car_model}`
 }
 
 /**
@@ -306,8 +313,15 @@ function getCarInfoById(/* code here */) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(/* code here */) {
-  /* code here */
+function getOlderCars(inventory, max) {
+/* code here */
+  let arr = []
+  for (let i = 0; i < inventory.length; i++) {
+    if (inventory.car_year >= max) {
+      arr.push(inventory.car_year)
+    }
+  }
+  return arr;
 }
 
 /**
@@ -323,8 +337,16 @@ function getOlderCars(/* code here */) {
  * made by either `Audi` or `Mercedes-Benz` or `Volkswagen` or `BMW`,
  * in the same order as they appear in the original inventory.
 */
-function getGermanCars(/* code here */) {
-  /* code here */
+function getGermanCars(inventory) {
+/* code here */
+  let arr = []
+  for (let i = 0; i < inventory.length; i++) {
+    if (inventory.car_make === 'Audi' || inventory.car_make === 'Mercedes-Benz' || inventory.car_make === 'Volkswagen' || inventory.car_make === 'BMW') {
+      arr.push(inventory.car_make)
+    }
+  }
+  return arr;
+
 }
 
 /**
@@ -340,8 +362,15 @@ function getGermanCars(/* code here */) {
  *         (1) causes the odometer in the object to be increased by the distance,
  *         (2) returns the updated value of the `odometer`.
 */
-function carMaker(/* code here */) {
-  /* code here */
+function carMaker(number) {
+
+  
+
+  return {
+    odometer: number,
+    drive: function (distance) {
+      return number + distance 
+  }}
 }
 
 /// ////// END OF CHALLENGE /////////
