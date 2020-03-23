@@ -293,10 +293,17 @@ function getModelYears(inventory) {
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
 */
-function getCarInfoById(inventory, id) {
+function getCarInfoById(inventory, num) {
 /* code here */
-  let identify = inventory[id]
-  return `This is a ${identify.car_make} ${identify.car_model}`
+  
+  let arr = []
+
+  for (let i = 0; i < inventory.length; i++) {
+    if (inventory[i].id === num) {
+      return `This is a ${inventory[i].car_make} ${inventory[i].car_model}`
+    }
+  }
+  
 }
 
 /**
@@ -313,11 +320,11 @@ function getCarInfoById(inventory, id) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(inventory, max) {
+function getOlderCars(inventory, max_year) {
 /* code here */
   let arr = []
   for (let i = 0; i < inventory.length; i++) {
-    if (inventory.car_year >= max) {
+    if (inventory.car_year >= max_year) {
       arr.push(inventory.car_year)
     }
   }
@@ -341,8 +348,8 @@ function getGermanCars(inventory) {
 /* code here */
   let arr = []
   for (let i = 0; i < inventory.length; i++) {
-    if (inventory.car_make === 'Audi' || inventory.car_make === 'Mercedes-Benz' || inventory.car_make === 'Volkswagen' || inventory.car_make === 'BMW') {
-      arr.push(inventory.car_make)
+    if (inventory[i].car_make === 'Audi' || inventory[i].car_make === 'Mercedes-Benz' || inventory[i].car_make === 'Volkswagen' || inventory[i].car_make === 'BMW') {
+      arr.push(inventory[i])
     }
   }
   return arr;
@@ -369,7 +376,8 @@ function carMaker(number) {
   return {
     odometer: number,
     drive: function (distance) {
-      return number + distance 
+      return number + distance;
+      
   }}
 }
 
