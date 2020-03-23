@@ -320,15 +320,17 @@ function getCarInfoById(inventory, num) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(inventory, max_year) {
+function getOlderCars(inventory, year) {
 /* code here */
-  let arr = []
-  for (let i = 0; i < inventory.length; i++) {
-    if (inventory.car_year >= max_year) {
-      arr.push(inventory.car_year)
-    }
+const olderCar = [];
+  
+for (let i=0; i<inventory.length; i++) {
+
+  if(inventory[i].car_year <= year) {
+    olderCar.push(inventory[i]);
   }
-  return arr;
+}
+return olderCar;
 }
 
 /**
@@ -370,15 +372,15 @@ function getGermanCars(inventory) {
  *         (2) returns the updated value of the `odometer`.
 */
 function carMaker(number) {
-
   
-
   return {
     odometer: number,
     drive: function (distance) {
-      return number + distance;
-      
-  }}
+      this.odometer = this.odometer + distance;
+      return this.odometer;
+    }
+    
+  }
 }
 
 /// ////// END OF CHALLENGE /////////
